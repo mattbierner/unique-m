@@ -1,0 +1,37 @@
+/**
+ * @fileOverview Unique transformer.
+ */
+package UniqueT
+with
+    import 'akh::trans::state' StateT,
+    
+    import '../spec/unique.js' UniqueMonad
+in {
+
+/* Structure
+ ******************************************************************************/
+/**
+ * Computation with support for getting an unique value.
+ */
+UniqueT := \m -> {
+    var Instance = StateT(m);
+    
+    UniqueMonad(Instance, Instance.modify);
+    
+    return Instance;
+};
+
+/* Running
+ ******************************************************************************/
+/**
+ * Run an unique computation.
+ * 
+ * @param m Unique computation.
+ * @param seed Initial value.
+ */
+UniqueT.runUniqueT = \m seed ->
+     StateT.evalStateT(
+         m,
+         ?isNaN seed : 1 : seed);
+
+}

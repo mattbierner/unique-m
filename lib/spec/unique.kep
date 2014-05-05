@@ -1,0 +1,17 @@
+/**
+ * @fileOverview Unique monad interface.
+ */
+package UniqueMonad
+{
+
+UniqueMonad := \Instance modify -> {
+    /**
+     * M.unique
+     * 
+     * Get new unique.
+     */
+    Instance.unique = Instance.prototype.unique = modify (+, 1);
+};
+
+
+}
